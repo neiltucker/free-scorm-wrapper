@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free SCORM Wrapper - Powered by Courseware Studio</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8fafc;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      background: #0f172a;
+      color: #ffffff;
+      width: 100%;
+      text-align: center;
+      padding: 24px 20px;
+      box-sizing: border-box;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
+    }
+    header p {
+      margin: 8px 0 0;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    main {
+      max-width: 720px;
+      width: 100%;
+      padding: 32px 20px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .status-connected {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .btn {
+      display: inline-block;
+      background: #d97706;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #b45309;
+    }
+    .promo-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      border: none;
+    }
+    .promo-card h2 {
+      color: #fbbf24;
+    }
+    .promo-card p {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .promo-btn {
+      background: #fbbf24;
+      color: #0f172a;
+    }
+    .promo-btn:hover {
+      background: #f59e0b;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Free SCORM Wrapper Template</h1>
+    <p>A lightweight, reliable foundation for launching interactive HTML5 courseware in any LMS</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>LMS Integration Status</h2>
+      <p>This course communicates with your LMS through the integrated API wrapper helper.</p>
+      <div id="connection-status" class="status-badge">Detecting SCORM API...</div>
+      <p id="api-type" style="font-size: 13px; color: #64748b; margin-top: 8px;"></p>
+    </div>
+
+    <div class="card">
+      <h2>Interactive Demo & Progression Tracker</h2>
+      <p>Use the buttons below to test the SCORM state storage mechanism. The API wrapper handles committing tracking variables dynamically.</p>
+      
+      <div style="margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+        <button id="btn-complete" class="btn">Mark Course Completed</button>
+        <button id="btn-score" class="btn" style="background: #2563eb;">Set Score (85%)</button>
+      </div>
+      <p id="feedback-text" style="font-size: 14px; font-weight: 600; color: #16a34a; height: 18px; margin: 0;"></p>
+    </div>
+
+    <div class="card promo-card">
+      <h2>Need Fully Packaged SCORM Courseware?</h2>
+      <p>Stop manually writing files and designing SCORM wrappers. **Courseware Studio** converts simple outlines, syllabus drafts, or technical files into complete, high-fidelity digital courseware programs instantly.</p>
+      <p>Paid packages include interactive SCORM 1.2/2004, xAPI, cmi5, PowerPoint slides, manuals, student guides, voice narration, videos, and embedded AI tutors with 100% commercial deployment rights.</p>
+      <a href="https://coursewarestudio.ai" target="_blank" class="btn promo-btn">Create Free Course Syllabus &rarr;</a>
+    </div>
+  </main>
+
+  <script src="scorm_api_wrapper.js"></script>
+  <script>
+    // Initialize SCORM on page load
+    window.onload = function() {
+      var initialized = SCORM_API_Helper.init();
+      var statusBadge = document.getElementById("connection-status");
+      var apiTypeTxt = document.getElementById("api-type");
+
+      if (initialized) {
+        statusBadge.innerText = "Connected to LMS";
+        statusBadge.classList.add("status-connected");
+        apiTypeTxt.innerText = "Active API Interface: " + (SCORM_API_Helper.is2004 ? "SCORM 2004 (API_1484_11)" : "SCORM 1.2 (API)");
+      } else {
+        statusBadge.innerText = "Offline Mode (No LMS detected)";
+        apiTypeTxt.innerText = "Running standalone in browser. LMS communication state will simulate in local memory.";
+      }
+    };
+
+    // Mark Completed button action
+    document.getElementById("btn-complete").onclick = function() {
+      SCORM_API_Helper.complete();
+      document.getElementById("feedback-text").innerText = "Success! Sent 'completed' status to the SCORM API.";
+    };
+
+    // Set score button action
+    document.getElementById("btn-score").onclick = function() {
+      if (SCORM_API_Helper.initialized) {
+        if (SCORM_API_Helper.is2004) {
+          SCORM_API_Helper.setValue("cmi.score.scaled", "0.85");
+          SCORM_API_Helper.setValue("cmi.score.raw", "85");
+        } else {
+          SCORM_API_Helper.setValue("cmi.core.score.raw", "85");
+        }
+      }
+      document.getElementById("feedback-text").innerText = "Success! Set learner score to 85% in SCORM database.";
+    };
+
+    // Clean up SCORM on exit
+    window.onbeforeunload = function() {
+      SCORM_API_Helper.terminate();
+    };
+  </script>
+</body>
+</html>
