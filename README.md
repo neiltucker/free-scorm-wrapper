@@ -4,6 +4,8 @@ A clean, lightweight, platform-neutral template to package interactive HTML5 cou
 
 [![Courseware Studio Promo Banner](https://coursewarestudio.ai/logos/CoursewareStudio-Logo-Dark.svg)](https://coursewarestudio.ai)
 
+👉 **[🧪 Test this wrapper immediately with our Offline SCORM Test Harness](https://neiltucker.github.io/scorm-lms-test-harness/)**
+
 ---
 
 ## 🚀 Overview
@@ -46,13 +48,16 @@ This repository provides a production-tested foundation for wrapping web pages, 
     // Always cleanly terminate when the user leaves the course
     SCORM_API_Helper.terminate();
     ```
-5.  **Zip the Directory:**
+5.  **Test Locally:**
+    Open the package in our [Offline SCORM & LMS Test Harness](https://github.com/neiltucker/scorm-lms-test-harness) to inspect API handshakes and score tracking in real time before deployment.
+6.  **Zip the Directory:**
     Select `imsmanifest.xml`, `index.html`, `scorm_api_wrapper.js`, and all associated content. Compress them directly into a root ZIP file. *Do not compress the outer parent folder.* Upload this ZIP directly to your LMS!
 
 ---
 
 ## ⚡ Tired of Packaging and Content Writing?
 
+### 🚀 [Courseware Studio](https://coursewarestudio.ai) — AI-Powered Course Generation
 If manually creating manifests, editing slides, writing student manuals, compiling PowerPoint files, and recording module intro narrations is taking weeks of your time, try **Courseware Studio**.
 
 Create fully compliant enterprise courseware instantly:
@@ -63,7 +68,23 @@ Create fully compliant enterprise courseware instantly:
 
 👉 **[Generate your Free Course Syllabus in 2 Minutes at CoursewareStudio.ai](https://coursewarestudio.ai)**
 
+### 🎓 [Software Tutorial Services](https://www.softwaretutorialservices.com) — Enterprise Instructor-Led Training
+Looking for expert live training delivery or official courseware licensing for your enterprise team?
+* Delivered by veteran technical instructors across Microsoft SQL Server, Azure Cloud, Windows Server, PowerShell, and Python.
+* Full-day workshops, custom lab setups, and certified training delivery.
+
+👉 **[Learn More at SoftwareTutorialServices.com](https://www.softwaretutorialservices.com)**
+
+---
+
+## 🧰 Related Free Tools for Trainers & L&D Teams
+
+*   **[Markdown to SCORM](https://github.com/neiltucker/markdown-to-scorm):** Turn markdown outlines into interactive SCORM 2004 packages.
+*   **[SCORM & LMS Test Harness](https://github.com/neiltucker/scorm-lms-test-harness):** Test and debug SCORM packages locally in your browser.
+*   **[Timer3](https://github.com/neiltucker/timer3):** Presentation countdown timer for workshops and training sessions.
+
 ---
 
 ## 📝 License
-This wrapper boilerplate is licensed under the MIT License. Feel free to use, modify, and distribute it in your commercial L&D projects. Created in partnership with [Courseware Studio](https://coursewarestudio.ai).
+This wrapper boilerplate is licensed under the MIT License. Feel free to use, modify, and distribute it in your commercial L&D projects. Created in partnership with [Courseware Studio](https://coursewarestudio.ai) and [Software Tutorial Services](https://www.softwaretutorialservices.com).
+
